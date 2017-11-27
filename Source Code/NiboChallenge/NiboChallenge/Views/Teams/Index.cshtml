@@ -1,0 +1,59 @@
+﻿@model IEnumerable<NiboChallenge.Models.Team>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeamName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Points)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+@if (Model.Count() == 8)
+{
+    <p>
+        You have exaclty 8 Teams! You may @Html.ActionLink("Start the Championship!", "Start", "Championship");
+    </p>
+}
+else if (Model.Count() < 8)
+{
+    <p>
+        The Championship may only start when exactly 8 teams are listed! Create more Teams!
+    </p>
+}
+else if (Model.Count() > 8)
+{
+    <p>
+        The Championship may only start when exactly 8 teams are listed! Delete some Teams!
+    </p>
+}
